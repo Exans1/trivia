@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        // TODO: Add code to check answers to questions
+        //run the script once the DOM is loaded
+        function delay(n){
+            return new Promise(function(resolve){
+                setTimeout(resolve,n*1000);
+                //https://www.delftstack.com/howto/javascript/javascript-wait-for-x-seconds/
+            });
+        }
+        async function myWrong () {
+            $(this).css('background', 'red');
+            document.getElementById("feedback1").innerHTML = "Incorrect";
+            await delay(1);
+            $(this).css('background', '#d9edff');
+            document.getElementById("feedback1").innerHTML = "";
+        };
+        async function myRight () {
+            $(this).css('background', 'green');
+            document.getElementById("feedback1").innerHTML = "Correct";
+            await delay(1);
+            document.getElementById("feedback1").innerHTML = "";
+        };
+        window.addEventListener("load", function (){
+            document.querySelector('#check').addEventListener('click', function (){
+                let input = document.querySelector('input');
+                if (input.value === '19'){
+                    input.style.backgroundColor="green";
+                    document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    setTimeout(function(){
+                    document.getElementById("feedback2").innerHTML = "";
+                    },1500);
+                }
+                else {
+                    input.style.backgroundColor="red";
+                    document.querySelector('#feedback2').innerHTML = 'Incorrect';
+                    setTimeout(function(){
+                    input.style.backgroundColor='#d9edff';
+                    document.getElementById("feedback2").innerHTML = "";
+                    },1500);
+
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1>Trivia!</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <!-- TODO: Add multiple choice question here -->
+            <h3>What is more portable</h3>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"> //https://stackoverflow.com/questions/19463651/how-to-change-the-class-of-an-html-button-at-runtime-on-its-click-event </script>
+            <button onclick="myWrong.call(this)">Desk Top</button>
+            <button onclick="myWrong.call(this)">Desktop</button>
+            <button onclick="myWrong.call(this)">Laptop</button>
+            <button onclick="myWrong.call(this)">X-Box</button>
+            <button onclick="myRight.call(this)">Phone</button>
+            <p id="feedback1"></p>
+        </div>
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <!-- TODO: Add free response question here -->
+            <h3>What is 7 + 12?</h3>
+            <input type="text"></input>
+            <button id="check">Check Answer</button>
+            <p id="feedback2"></p>
+        </div>
+    </div>
+</body>
+</html>
